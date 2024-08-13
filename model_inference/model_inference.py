@@ -38,6 +38,14 @@ model = joblib.load(f"{data_path}/saved_models/rf.pkl")
 def index():
     return render_template('index.html', states=unique_states, cities=unique_cities)
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/city_state', methods=['GET'])
 def get_state_for_city():
     city = request.args.get('city')

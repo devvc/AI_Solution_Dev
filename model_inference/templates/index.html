@@ -4,15 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Loyalty Prediction</title>
+    <!-- Link to Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Other styles and scripts -->
     <style>
         body {
             font-family: Arial, sans-serif;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
             background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 20px;
+            color: #f4f4f4;
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .header .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        .header .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .header .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+        .header .nav-links a:hover {
+            text-decoration: underline;
         }
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto;
             background: #fff;
             padding: 20px;
             border-radius: 5px;
@@ -56,10 +98,22 @@
             color: #888;
         }
     </style>
-    <!-- Include a library for searchable dropdowns -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
 </head>
 <body>
+    <!-- Header with navigation links -->
+    <div class="header">
+        <div class="logo">
+            <i class="fa fa-line-chart"></i>
+            <h1>Olist Customer Loyalty Prediction - Home</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+    
     <div class="container">
         <h1>Customer Loyalty Prediction</h1>
         <form id="prediction-form">
@@ -69,13 +123,12 @@
                 <p class="hint">Please enter a valid Brazilian city.</p>
 
                 <label for="customer_state">Customer State:</label>
-                <input type="text" id="customer_state" name="customer_state" placeholder="Enter state (e.g., SP)" required readonly>
-                <p class="hint">Please enter a valid Brazilian state (e.g., SP, RJ, MG).</p>
+                <input type="text" id="customer_state" name="customer_state" placeholder="Autofilled" required readonly>
+                <p class="hint">This will be filled when customer's city input correctly.</p>
             </div>
             <div class="form-group">
                 <label for="product_category_name_english">Product Category:</label>
                 <select id="product_category_name_english" name="product_category_name_english" required>
-                    <!-- Dynamically populated options will go here -->
                 </select>
             </div>
             <div class="form-group">
@@ -184,13 +237,12 @@
                     document.getElementById('result').innerText = `Error: ${result.error}`;
                 } else {
                     const predictionText = result.prediction === 'Y' 
-                        ? '<strong>Customer is likely to be a repeat buyer</strong>' 
-                        : '<strong>Customer is not likely to be a repeat buyer</strong>';
-                    document.getElementById('result').innerHTML = `Prediction: ${predictionText}<br>Percentage of Possibility: ${(result.probability * 100).toFixed(2)}%`;
+                        ? 'This customer is likely to be a repeat buyer.'
+                        : 'This customer is unlikely to be a repeat buyer.';
+                    document.getElementById('result').innerText = predictionText;
                 }
             } catch (error) {
                 console.error('Error:', error);
-                document.getElementById('result').innerText = 'An error occurred. Please try again.';
             }
         });
     </script>
