@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model-inference-deployment
+  labels:
+    app: model-inference
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: model-inference
+  template:
+    metadata:
+      labels:
+        app: model-inference
+    spec:
+      containers:
+      - name: model-inference-container
+        image: <your-dockerhub-username>/model_inference_image:latest
+        command: ["python", "model_inference.py"]
+        volumeMounts:
+        - name: data-volume
+          mountPath: /data
+        ports:
+        - containerPort: 5000  # This is necessary to match with the EXPOSE in Dockerfile
+      restartPolicy: Always
+      volumes:
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: shared-pvc

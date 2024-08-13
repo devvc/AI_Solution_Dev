@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Loyalty Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .hint {
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+    <!-- Include a library for searchable dropdowns -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Loyalty Prediction</h1>
+        <form id="prediction-form">
+            <div class="form-group">
+                <label for="customer_city">Customer City:</label>
+                <input type="text" id="customer_city" name="customer_city" placeholder="Enter city" required>
+                <p class="hint">Please enter a valid Brazilian city.</p>
+
+                <label for="customer_state">Customer State:</label>
+                <input type="text" id="customer_state" name="customer_state" placeholder="Enter state (e.g., SP)" required readonly>
+                <p class="hint">Please enter a valid Brazilian state (e.g., SP, RJ, MG).</p>
+            </div>
+            <div class="form-group">
+                <label for="product_category_name_english">Product Category:</label>
+                <select id="product_category_name_english" name="product_category_name_english" required>
+                    <!-- Dynamically populated options will go here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price">Price of product:</label>
+                <input type="number" step="0.01" min="0" id="price" name="price" required>
+            </div>
+            <div class="form-group">
+                <label for="freight_value">Freight Value:</label>
+                <input type="number" step="0.01" min="0" id="freight_value" name="freight_value" required>
+            </div>
+            <div class="form-group">
+                <label for="product_photos_qty">Product Photos Qty:</label>
+                <input type="number" min="0" id="product_photos_qty" name="product_photos_qty" required>
+            </div>
+            <div class="form-group">
+                <label for="product_weight_g">Product Weight (g):</label>
+                <input type="number" min="0" id="product_weight_g" name="product_weight_g" required>
+            </div>
+            <div class="form-group">
+                <label for="product_length_cm">Product Length (cm):</label>
+                <input type="number" min="0" id="product_length_cm" name="product_length_cm" required>
+            </div>
+            <div class="form-group">
+                <label for="product_height_cm">Product Height (cm):</label>
+                <input type="number" min="0" id="product_height_cm" name="product_height_cm" required>
+            </div>
+            <div class="form-group">
+                <label for="product_width_cm">Product Width (cm):</label>
+                <input type="number" min="0" id="product_width_cm" name="product_width_cm" required>
+            </div>
+            <div class="form-group">
+                <label for="payment_type">Payment Type:</label>
+                <select id="payment_type" name="payment_type" required>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="debit_card">Debit Card</option>
+                    <option value="boleto">Boleto</option>
+                    <option value="voucher">Voucher</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="payment_installments">Payment Installments:</label>
+                <input type="number" id="payment_installments" name="payment_installments" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Predict</button>
+            </div>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // Initialize Select2 for searchable dropdowns
+        $('#product_category_name_english, #payment_type').select2();
+    
+        // Fetch unique product categories dynamically from the server
+        fetch('/categories')
+            .then(response => response.json())
+            .then(categories => {
+                const categorySelect = document.getElementById('product_category_name_english');
+                categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.text = category.replace(/_/g, ' ');
+                    categorySelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching categories:', error));
+
+        // Fetch state based on city selection
+        $('#customer_city').on('change', function() {
+            const selectedCity = $(this).val();
+            $.ajax({
+                url: '/city_state',
+                type: 'GET',
+                data: { city: selectedCity },
+                success: function(response) {
+                    $('#customer_state').val(response.state);
+                },
+                error: function() {
+                    $('#customer_state').val('');  // Clear the state if city not found
+                }
+            });
+        });
+    
+        // Handle form submission
+        document.getElementById('prediction-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+    
+            // Send data to Flask app and get prediction result
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+    
+                const result = await response.json();
+    
+                // Display the result
+                if (result.error) {
+                    document.getElementById('result').innerText = `Error: ${result.error}`;
+                } else {
+                    const predictionText = result.prediction === 'Y' 
+                        ? '<strong>Customer is likely to be a repeat buyer</strong>' 
+                        : '<strong>Customer is not likely to be a repeat buyer</strong>';
+                    document.getElementById('result').innerHTML = `Prediction: ${predictionText}<br>Percentage of Possibility: ${(result.probability * 100).toFixed(2)}%`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = 'An error occurred. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html>
