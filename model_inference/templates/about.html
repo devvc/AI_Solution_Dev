@@ -1,0 +1,114 @@
+<!-- about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 20px;
+            color: #f4f4f4;
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .header .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        .header .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .header .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+        .header .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 60px);
+        }
+
+        .box {
+            background-color: #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        .box h1 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .box p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <i class="fa fa-line-chart"></i>
+            <h1>About</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="box">
+            <!-- <h1>About</h1> -->
+            <h2>About Us:</h2>
+            <p>We are a team of dedicated students from Nanyang Polytechnic (NYP). Our team includes Chong Jia Yi, also known as Jeana, and Aw Tian Yu. We are committed to enhancing our customers’ experience with our applications. We welcome any comments and suggestions for improvement.</p>
+            <h2>About Our Application:</h2>
+            <p>This application is designed for internal use by Olist to predict potential repeat buyers, thereby improving customer service and achieving business goals. We utilized models such as Random Forest and Linear Regression, comparing their performance to select the most effective one for our predictions.</p>
+        </div> 
+    </div>
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+</body>
+</html>
