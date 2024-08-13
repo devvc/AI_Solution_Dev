@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -54,35 +55,59 @@
 
         .container {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: calc(100vh - 60px);
+            padding: 0px 10px;
+            margin: 0 auto;
+        }
+
+        .top-box {
+            background-color: #333;
+            color: white;
+            padding: 70px;
+            width: 100%;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .boxes {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 20px;
+            flex-wrap: wrap; /* Ensure boxes wrap on smaller screens */
         }
 
         .box {
             background-color: #ddd;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 280px; /* Set minimum width for responsiveness */
             text-align: center;
-            max-width: 600px;
-            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* Remove fixed height */
         }
 
-        .box h1 {
+        .box h2 {
             margin-top: 0;
             color: #333;
-        }
-
-        .box p {
-            margin-bottom: 20px;
-            color: #555;
         }
 
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
         .social-icons a {
@@ -94,13 +119,32 @@
         .social-icons a:hover {
             color: #555;
         }
+
+        .email-pitch {
+            margin-top: 20px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .email-icon {
+            margin-top: 10px;
+            font-size: 28px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .email-icon:hover {
+            color: #555;
+        }
+
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
 </head>
 <body>
     <div class="header">
         <div class="logo">
             <i class="fa fa-line-chart"></i>
-            <h1>Contact us</h1>
+            <h1>Olist Customer Loyalty Prediction</h1>
         </div>
         <div class="nav-links">
             <a href="index.html">Home</a>
@@ -109,20 +153,33 @@
         </div>
     </div>
     <div class="container">
-        <div class="box">
-            <h1>Contact Us</h1>
-            <p>Need help with troubleshooting or want to know more about how our model works? Contact us!</p>
-            <p>Stay updated with our latest news and updates by following us on:</p>
-            <div class="social-icons">
-                <a href="https://www.instagram.com" target="_blank" class="fa fa-instagram"></a>
-                <a href="https://www.facebook.com" target="_blank" class="fa fa-facebook"></a>
-                <a href="mailto:221531N@mymail.nyp.edu.sg" class="fa fa-envelope"></a>
-                <a href="https://www.twitter.com" target="_blank" class="fa fa-twitter"></a>
+        <div class="top-box">
+            Let's have a talk
+        </div>
+        <div class="boxes">
+            <div class="box">
+                <h2>Our Address</h2>
+                <p>180 Ang Mo Kio Ave 8<br>Singapore 569830</p>
+            </div>
+            <div class="box">
+                <h2>Follow Us</h2>
+                <p>Stay updated with our latest news and updates by following us on:</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com" target="_blank" class="fa fa-instagram"></a>
+                    <a href="https://www.facebook.com" target="_blank" class="fa fa-facebook"></a>
+                    <a href="https://www.twitter.com" target="_blank" class="fa fa-twitter"></a>
+                </div>
+            </div>
+            <div class="box">
+                <h2>Pitch Us</h2>
+                <p>Send us an email, to tell us what you think!<br> Not sure how to start? Here's how:</p>
+                <p class="email-pitch">My name is <b>[Your Name]</b> and I would like to <b>[your suggestion]</b>.</p>
+                <a href="mailto:support@example.com" class="fa fa-envelope email-icon"></a>
             </div>
         </div>
     </div>
     <footer>
-        <p>&copy; 2024 Your Company. All rights reserved.</p>
+        <p>&copy; 2024 JY&TY. All rights reserved.</p>
     </footer>
 </body>
 </html>

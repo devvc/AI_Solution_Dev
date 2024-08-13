@@ -60,6 +60,7 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+        
         h1 {
             text-align: center;
             color: #333;
@@ -178,6 +179,9 @@
         </form>
         <div class="result" id="result"></div>
     </div>
+    <footer>
+        <p>&copy; 2024 JY&TY. All rights reserved.</p>
+    </footer>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
@@ -237,10 +241,11 @@
                     document.getElementById('result').innerText = `Error: ${result.error}`;
                 } else {
                     const predictionText = result.prediction === 'Y' 
-                        ? 'This customer is likely to be a repeat buyer.'
-                        : 'This customer is unlikely to be a repeat buyer.';
-                    document.getElementById('result').innerText = predictionText;
+                        ? '<strong>Customer is likely to be a repeat buyer</strong>' 
+                        : '<strong>Customer is not likely to be a repeat buyer</strong>';
+                    document.getElementById('result').innerHTML = `Prediction: ${predictionText}<br>Percentage of Possibility: ${(result.probability * 100).toFixed(2)}%`;
                 }
+
             } catch (error) {
                 console.error('Error:', error);
             }

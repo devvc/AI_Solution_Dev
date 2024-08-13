@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Need to be accessed externally
 EXPOSE 5000
 
-# Copy the inference script & index.html
+# Copy the inference script & html files
 COPY model_inference.py .
 COPY templates/ templates/
 
