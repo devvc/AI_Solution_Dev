@@ -4,8 +4,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 
 # Define constants directly in the script.
-# data_path = '/data'
-data_path = r"C:/NYP_JiayiCourses/Y3S1/EGT309 - AI SOLUTION DEVELOPMENT PROJECT/App/volume"
+data_path = '/mnt/data'
+# data_path = r"C:/NYP_JiayiCourses/Y3S1/EGT309 - AI SOLUTION DEVELOPMENT PROJECT/App/volume"
 train_columns = [
             'customer_city', 'customer_state', 'product_category_name_english', 'price', 
             'freight_value', 'product_photos_qty', 'product_weight_g', 'product_length_cm', 

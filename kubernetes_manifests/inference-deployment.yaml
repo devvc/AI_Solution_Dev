@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
       - name: model-inference-container
-        image: <your-dockerhub-username>/model_inference_image:latest
+        image: jeana0103/model_inference_image:latest
         command: ["python", "model_inference.py"]
         volumeMounts:
         - name: data-volume
-          mountPath: /data
+          mountPath: /mnt/data
         ports:
         - containerPort: 5000  # This is necessary to match with the EXPOSE in Dockerfile
       restartPolicy: Always

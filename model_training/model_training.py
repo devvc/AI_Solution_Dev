@@ -6,10 +6,10 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 import pickle
 
-# data_path = '/data'
-data_path = r"C:/NYP_JiayiCourses/Y3S1/EGT309 - AI SOLUTION DEVELOPMENT PROJECT/App/volume"
+data_path = '/mnt/data'
+# data_path = r"C:/NYP_JiayiCourses/Y3S1/EGT309 - AI SOLUTION DEVELOPMENT PROJECT/App/volume"
 #data_path = r"C:/Users/tian yu/Documents/nyp/EGT309/App/App/volume"
-saved_models_path = f'{data_path}/saved_models'
+saved_models_path = f'{data_path}'
 
 class ModelTrain:
     def __init__(self):

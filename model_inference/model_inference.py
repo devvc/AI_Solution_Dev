@@ -7,7 +7,8 @@ import joblib
 app = Flask(__name__)
 
 # Define the data path
-data_path = r"C:/NYP_JiayiCourses/Y3S1/EGT309 - AI SOLUTION DEVELOPMENT PROJECT/App/volume"
+data_path = '/mnt/data'
+# data_path = r"C:/NYP_JiayiCourses/Y3S1/EGT309 - AI SOLUTION DEVELOPMENT PROJECT/App/volume"
 
 # Load customer dataset and extract unique cities and states
 customer_data = pd.read_csv(f"{data_path}/customer_dataset.csv")
@@ -32,7 +33,7 @@ def manual_min_max_scaler(X, min_vals, max_vals):
     return (X - min_vals) / (max_vals - min_vals)
 
 # Load the trained model
-model = joblib.load(f"{data_path}/saved_models/rf.pkl")
+model = joblib.load(f"{data_path}/rf.pkl")
 
 @app.route('/')
 def index():

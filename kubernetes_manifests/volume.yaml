@@ -8,7 +8,8 @@ spec:
   accessModes:
     - ReadWriteMany  # Allows multiple pods to read and write
   hostPath:
-    path: /mnt/data  # Path in Minikube where your local directory is mounted
+    path: /mnt/data  # Path on the host where the data is located
+  storageClassName: standard
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -20,3 +21,4 @@ spec:
   resources:
     requests:
       storage: 10Gi  # Must match the size of the PV
+  storageClassName: standard  # Must match the storageClassName of the PV

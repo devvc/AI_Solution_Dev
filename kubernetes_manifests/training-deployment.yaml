@@ -16,11 +16,11 @@ spec:
     spec:
       containers:
       - name: model-training-container
-        image: <your-dockerhub-username>/model_training_image:latest
+        image: jeana0103/model_training_image:latest
         command: ["python", "model_training.py"]
         volumeMounts:
         - name: data-volume
-          mountPath: /data
+          mountPath: /mnt/data
       restartPolicy: Always
       volumes:
       - name: data-volume

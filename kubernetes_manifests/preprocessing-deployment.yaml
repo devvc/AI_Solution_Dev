@@ -17,10 +17,10 @@ spec:
       containers:
       - name: data-preprocessing-container
         image: jeana0103/data_preprocessing_image:latest
-        command: ["python", "preprocessing_script.py"]
+        command: ["python", "data_preprocessing.py"]
         volumeMounts:
         - name: data-volume
-          mountPath: /data  # This is where the datasets will be accessed
+          mountPath: /mnt/data  # This is where the datasets will be accessed
       restartPolicy: Always
       volumes:
       - name: data-volume
